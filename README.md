@@ -1,12 +1,12 @@
 # AI Conversational Chatbot 🤖
 
-An AI-powered voice bot built using **Python, Streamlit, OpenAI Gemini, Whisper, and ElevenLabs**. This chatbot provides an interactive experience where users can communicate via text or voice, receive AI-generated responses, and listen to spoken replies.
+An AI-powered voice bot built using **Python, Streamlit, OpenAI Gemini, Whisper, and Coqui TTS**. This chatbot provides an interactive experience where users can communicate via text or voice, receive AI-generated responses, and listen to spoken replies.
 
 ## 🚀 Features
 - **Real-time Voice & Text Interaction**: Users can input queries via text or speech.
 - **AI-Powered Responses**: Utilizes **Google Gemini** to generate intelligent responses.
 - **Speech-to-Text Conversion**: Uses **Whisper** for accurate speech recognition.
-- **Text-to-Speech Generation**: Uses **ElevenLabs API** for natural-sounding audio responses.
+- **Text-to-Speech Generation**: Uses **Coqui TTS** for offline, natural-sounding audio responses.
 - **Interactive UI with Streamlit**: A simple, intuitive user interface for smooth interaction.
 - **Session Persistence**: Maintains conversation history during the session.
 
@@ -14,7 +14,7 @@ An AI-powered voice bot built using **Python, Streamlit, OpenAI Gemini, Whisper,
 - **Frontend**: Streamlit
 - **Backend**: Python
 - **AI Processing**: OpenAI Whisper, Google Gemini
-- **Text-to-Speech**: ElevenLabs
+- **Text-to-Speech**: Coqui TTS (local processing)
 - **Voice Input**: `audio_recorder_streamlit`
 - **Logging & Debugging**: Python `logging`
 
@@ -36,9 +36,9 @@ pip install -r requirements.txt
 ### Set API Keys
 Create a `.env` file in the root directory and add:
 ```env
-ELEVEN_API_KEY=your-elevenlabs-api-key
 GEMINI_API_KEY=your-google-gemini-api-key
 ```
+(Note: Coqui TTS runs locally and does not require an API key.)
 
 ### Run the Application
 ```bash
@@ -58,10 +58,11 @@ streamlit run app.py
 
 ## 🔧 Project Structure
 ```
-📂 ai-conversational-chatbot
- ├── 📂 utils                 # Utility functions (AI, speech, etc.)
+📾 ai-conversational-chatbot
+ ├── 📾 utils                 # Utility functions (AI, speech, etc.)
  ├── app.py                   # Main Streamlit application
  ├── requirements.txt          # Required dependencies
  ├── README.md                 # Project documentation
  ├── .env                      # API keys (excluded from repo)
 ```
+
