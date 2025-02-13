@@ -3,12 +3,9 @@ import logging
 import base64
 import streamlit as st
 import whisper
-from elevenlabs.client import ElevenLabs
+from TTS.api import TTS
 
-ELEVEN_API_KEY = "API-KEY"
-client = ElevenLabs(api_key=ELEVEN_API_KEY)
-
-GEMINI_API_KEY = "API-KEY"
+GEMINI_API_KEY = "API_KEY"
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-pro")
 
@@ -35,23 +32,19 @@ logging.basicConfig(level=logging.DEBUG)
 
 def text_to_speech(input_text):
     try:
-        logging.debug("Generating audio using ElevenLabs API...")
-        audio = client.generate(
-            text=input_text,
-            model="eleven_turbo_v2"
-        )
-        
-        file_path = "output_audio.mp3"
-        with open(file_path, "wb") as f:
-            for chunk in audio:
-                f.write(chunk)
+        if not input_text or not isinstance(input_text, str):
+            logging.error("Invalid input text provided.")
+            return None
 
-        logging.debug(f"Audio saved to {file_path}")
+        tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC")  
+
+        file_path = "output_audio.wav"
+        tts.tts_to_file(text=input_text, file_path=file_path)
+
         return file_path
     except Exception as e:
-        logging.error(f"Error in text_to_speech: {str(e)}")
+        logging.error(f"Error in text_to_speech: {str(e)}") 
         return None
-
 
 def autoplay_audio(file_path: str):
     try:
